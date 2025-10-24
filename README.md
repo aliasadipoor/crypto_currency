@@ -1,7 +1,6 @@
 # crypto_currency
 
-A new Flutter project.
-
+“This is a cryptocurrency listing project that includes cryptocurrencies.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
