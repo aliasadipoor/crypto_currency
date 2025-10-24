@@ -41,7 +41,7 @@ class _CoinListPageState extends State<CoinListPage> {
                 textDirection: TextDirection.rtl,
                 child: TextField(
                   onChanged: (value) {
-                   
+                    _filterList(value);
                   },
                   decoration: InputDecoration(
                     hintText: 'اسم رمزارز معتبر را سرچ کنید... ',
@@ -170,5 +170,25 @@ class _CoinListPageState extends State<CoinListPage> {
             .map<Crypto>((jsonMapObject) => Crypto.fromMapJson(jsonMapObject))
             .toList();
     return cryptoList;
+  }
+
+  Future<void> _filterList(String enteredkeyword) async {
+    List<Crypto> cryptoResultList = [];
+    if (enteredkeyword.isEmpty) {
+      var result = await _getData();
+      setState(() {
+        cryptoList = result;
+      });
+      return;
+    }
+    cryptoResultList =
+        cryptoList!.where((element) {
+          return element.name.toLowerCase().contains(
+            enteredkeyword.toLowerCase(),
+          );
+        }).toList();
+    setState(() {
+      cryptoList = cryptoResultList;
+    });
   }
 }
